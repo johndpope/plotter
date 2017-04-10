@@ -1,0 +1,26 @@
+{
+  "name": "plotter",
+  "version": "1.0.0",
+  "description": "Plotting utility for logs generated from ROSMOD.",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rosmod/plotter.git"
+  },
+  "keywords": [
+    "rosmod",
+    "plotter"
+  ],
+  "author": "William Emfinger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rosmod/plotter/issues"
+  },
+  "homepage": "https://github.com/rosmod/plotter#readme",
+  "dependencies": {
+    "plotly.js": "^1.25.2"
+  }
+}
