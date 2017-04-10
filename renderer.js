@@ -22,7 +22,10 @@ requirejs.config({
 var parser = requirejs('./parser.js');
 var userparser = requirejs('./userParser.js');
 var plotter = requirejs('./plotter.js');
+var plotly = requirejs('plotly-js/plotly.min');
 var d3 = requirejs('d3');
+
+var plotIDs = [];
 
 function removeExtension(filename){
     var lastDotPosition = filename.lastIndexOf(".");
@@ -105,7 +108,7 @@ menu.append(new MenuItem({label: 'Open Log', click() {
 			    data[key].data.push([last_time, 0]);
 			});
 			plotter.plotData('plot_'+a, data, offset);
-		    }
+			plotIDs.push('#plot_'+a);		    }
 		    else
 			$(container).detach();
 		}
@@ -113,6 +116,12 @@ menu.append(new MenuItem({label: 'Open Log', click() {
 	}
     });
 }}));
+
+$( window ).resize(function() {
+    plotIDs.map(function(plotID) {
+	plotly.Plots.resize(d3.select(plotID).node());
+    });
+});
 
 window.addEventListener('contextmenu', (e) => {
     e.preventDefault();
