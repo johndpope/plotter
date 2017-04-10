@@ -7,22 +7,21 @@ var _ = require('lodash');
 var fs = require('fs');
 
 var requirejs = require('requirejs');
+requirejs.config({
+    baseUrl: __dirname,
+
+    nodeRequire: require,
+
+    paths: {
+        'plotly-js': './node_modules/plotly.js/dist/'
+    }
+});
+
 
 try {
     console.log('looking for deps here.');
 
     var plotHtml = fs.readFileSync('plot.html').toString();
-
-    requirejs.config({
-	baseUrl: __dirname,
-
-	nodeRequire: require,
-
-	paths: {
-            'plotly-js': './node_modules/plotly.js/dist/'
-	}
-    });
-
     var parser = requirejs('./parser.js');
     var userparser = requirejs('./userParser.js');
     var plotter = requirejs('./plotter.js');
@@ -33,17 +32,6 @@ catch (err) {
     console.log('looking for deps in electron dist.');
 
     var plotHtml = fs.readFileSync('./resources/app/plot.html').toString();
-
-    requirejs.config({
-	baseUrl: __dirname,
-
-	nodeRequire: require,
-
-	paths: {
-            'plotly-js': './resources/app/node_modules/plotly.js/dist/'
-	}
-    });
-
     var parser = requirejs('./resources/app/parser.js');
     var userparser = requirejs('./resources/app/userParser.js');
     var plotter = requirejs('./resources/app/plotter.js');
