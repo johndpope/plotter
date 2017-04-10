@@ -5,7 +5,14 @@ var dialog = remote.dialog;
 var path = require('path');
 var _ = require('lodash');
 var fs = require('fs');
-var plotHtml = fs.readFileSync('plot.html').toString();
+var plotHtml = null;
+try {
+    plotHtml = fs.readFileSync('plot.html').toString();
+}
+catch (err) {
+    console.log('looking for plot.html in electron dist.');
+    plotHtml = fs.readFileSync('./resources/app/plot.html').toString();
+}
 
 var requirejs = require('requirejs');
 
