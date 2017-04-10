@@ -5,32 +5,52 @@ var dialog = remote.dialog;
 var path = require('path');
 var _ = require('lodash');
 var fs = require('fs');
-var plotHtml = null;
-try {
-    plotHtml = fs.readFileSync('plot.html').toString();
-}
-catch (err) {
-    console.log('looking for plot.html in electron dist.');
-    plotHtml = fs.readFileSync('./resources/app/plot.html').toString();
-}
 
 var requirejs = require('requirejs');
 
-requirejs.config({
-    baseUrl: __dirname,
+try {
+    console.log('looking for deps here.');
 
-    nodeRequire: require,
+    var plotHtml = fs.readFileSync('plot.html').toString();
 
-    paths: {
-        'plotly-js': './node_modules/plotly.js/dist/'
-    }
-});
+    requirejs.config({
+	baseUrl: __dirname,
 
-var parser = requirejs('./parser.js');
-var userparser = requirejs('./userParser.js');
-var plotter = requirejs('./plotter.js');
-var plotly = requirejs('plotly-js/plotly.min');
-var d3 = requirejs('d3');
+	nodeRequire: require,
+
+	paths: {
+            'plotly-js': './node_modules/plotly.js/dist/'
+	}
+    });
+
+    var parser = requirejs('./parser.js');
+    var userparser = requirejs('./userParser.js');
+    var plotter = requirejs('./plotter.js');
+    var plotly = requirejs('plotly-js/plotly.min');
+    var d3 = requirejs('d3');
+}
+catch (err) {
+    console.log('looking for deps in electron dist.');
+
+    var plotHtml = fs.readFileSync('./resources/app/plot.html').toString();
+
+    requirejs.config({
+	baseUrl: __dirname,
+
+	nodeRequire: require,
+
+	paths: {
+            'plotly-js': './resources/app/node_modules/plotly.js/dist/'
+	}
+    });
+
+    var parser = requirejs('./resources/app/parser.js');
+    var userparser = requirejs('./resources/app/userParser.js');
+    var plotter = requirejs('./resources/app/plotter.js');
+    var plotly = requirejs('plotly-js/plotly.min');
+    var d3 = requirejs('d3');
+}
+
 
 var plotIDs = [];
 
