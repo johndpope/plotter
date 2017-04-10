@@ -1,5 +1,6 @@
 {
   "name": "plotter",
+  "productName": "ROSMOD Plotter",
   "version": "1.0.0",
   "description": "Plotting utility for logs generated from ROSMOD.",
   "main": "app.js",
@@ -26,5 +27,8 @@
     "path": "^0.12.7",
     "plotly.js": "^1.25.2",
     "requirejs": "^2.3.3"
+  },
+  "devDependencies": {
+    "electron": "^1.6.2"
   }
 }
