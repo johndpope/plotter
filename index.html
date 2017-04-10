@@ -3,10 +3,16 @@
     <head>
         <meta charset="UTF-8">
         <title>ROSMOD Plotter</title>
+        <script>window.$ = window.jQuery = require('jquery');</script>
         <script src="./renderer.js" type="text/javascript" ></script>
 		    <link rel="stylesheet" type="text/css" href="main.css">
     </head>
     <body>
-        <div id="plot" width="100%"></div>
+        <div id="main">
+            <div id="log">
+    <h3 id="title" align="center"></h3>
+    <div id="plot" width="100%"></div>
+</div>
+        </div>
     </body>
 </html>

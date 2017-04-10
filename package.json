@@ -22,6 +22,7 @@
   "homepage": "https://github.com/rosmod/plotter#readme",
   "dependencies": {
     "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
     "plotly.js": "^1.25.2",
     "requirejs": "^2.3.3"
   }
