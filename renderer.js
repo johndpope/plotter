@@ -23,6 +23,12 @@ var userparser = requirejs('./userParser.js');
 var plotter = requirejs('./plotter.js');
 var d3 = requirejs('d3');
 
+function removeExtension(filename){
+    var lastDotPosition = filename.lastIndexOf(".");
+    if (lastDotPosition === -1) return filename;
+    else return filename.substr(0, lastDotPosition);
+}
+
 dialog.showOpenDialog(function (fileNames) {
 		if(fileNames === undefined)
 				console.log("No file selected");
@@ -33,7 +39,7 @@ dialog.showOpenDialog(function (fileNames) {
                 alert("Couldn't open the file: " + err.message);
                 return;
             }
-            fileNames[0] = path.basename(fileNames[0]).replace(/\./g, '_');
+            fileNames[0] = removeExtension(path.basename(fileNames[0])).replace(/\./g, '_');
             // init vars
             var a = fileNames[0],
                 datas = {},
@@ -52,7 +58,10 @@ dialog.showOpenDialog(function (fileNames) {
             };
 
             // parse the log
-            datas[a] = parser.getDataFromAttribute(data);
+            var parsed = parser.getDataFromAttribute(data);
+            if (_.isEmpty(parsed))
+                parsed = userparser.getDataFromAttribute(data);
+            datas[a] = parsed;
             var aliases = Object.keys(datas[a]);
 			      aliases.map((key) => {
 				        var d = datas[a][key].data;
@@ -73,7 +82,6 @@ dialog.showOpenDialog(function (fileNames) {
 			          $('#main').append(plotHtml);
                  */
 			          var container = $('#log');
-                console.log(container);
 			          $(container).attr('id', 'log_'+a);
 
 			          var title = $(container).find('#title');
