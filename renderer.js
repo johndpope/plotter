@@ -1,6 +1,11 @@
 var remote = require('electron').remote;
 var dialog = remote.dialog;
 
+var path = require('path');
+var _ = require('lodash');
+var fs = require('fs');
+var plotHtml = fs.readFileSync('plot.html');
+
 var requirejs = require('requirejs');
 
 requirejs.config({
@@ -13,17 +18,10 @@ requirejs.config({
     }
 });
 
-var _ = require('lodash');
-var fs = require('fs');
-
-//window.$ = window.jQuery = require('jquery');
-
 var parser = requirejs('./parser.js');
 var userparser = requirejs('./userParser.js');
 var plotter = requirejs('./plotter.js');
 var d3 = requirejs('d3');
-var plotHtml = fs.readFileSync('plot.html');
-//var plotly = require('plotly.js/dist/plotly.js');
 
 dialog.showOpenDialog(function (fileNames) {
 		if(fileNames === undefined)
@@ -35,7 +33,7 @@ dialog.showOpenDialog(function (fileNames) {
                 alert("Couldn't open the file: " + err.message);
                 return;
             }
-
+            fileNames[0] = path.basename(fileNames[0]).replace(/\./g, '_');
             // init vars
             var a = fileNames[0],
                 datas = {},
