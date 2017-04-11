@@ -29,6 +29,7 @@ try {
     var d3 = requirejs('d3');
 }
 catch (err) {
+    console.log(err);
     console.log('looking for deps in electron dist.');
 
     var plotHtml = fs.readFileSync('./resources/app/plot.html').toString();
@@ -104,7 +105,8 @@ menu.append(new MenuItem({label: 'Open Log', click() {
 		    var data = datas[a];
 		    if (!_.isEmpty(data)) {
 			plotter.plotData('plot_'+a, data);
-			plotIDs.push('#plot_'+a);		    }
+			plotIDs.push('#plot_'+a);
+		    }
 		    else
 			$(container).detach();
 		}
