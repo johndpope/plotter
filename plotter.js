@@ -16,7 +16,7 @@ define(['plotly-js/plotly.min', 'd3'], function(Plotly,d3) {
 
 	    Object.keys(data).map(function(key) {
 		pdata.push({
-		    x : data[key].data.map(function(xy) { return xy[0] - offset; }),
+		    x : data[key].data.map(function(xy) { return new Date(xy[0]); }),
 		    y : data[key].data.map(function(xy) { return xy[1]; }),
 		    mode: 'lines',
                     type: 'scatter',

@@ -13,8 +13,8 @@ define([], function() {
 			                  data : [],
 		                };
 		            }
-		            var enq = parseFloat(result[2]);
-		            var comp = parseFloat(result[4]);
+		            var enq = parseFloat(result[2]) * 1000000.0;
+		            var comp = parseFloat(result[4]) * 1000000.0;
 		            var exec_time = parseFloat(result[5]);
 		            log_data[alias].data.push([enq,  0]);
 		            log_data[alias].data.push([enq,  exec_time]);

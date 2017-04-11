@@ -14,7 +14,7 @@ define([], function() {
 		                };
 		            }
 		            var time = parseFloat(result[2]);
-		            time = time / 1000000000.0;
+		            time = time / 1000000.0;
 		            var data = parseFloat(result[3]);
 		            log_data[alias].data.push([time, data]);
 		            result = re.exec(attribute);
